@@ -4,6 +4,10 @@
       Home
     </ion-title>
   </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar [(ngModel)]="searchText" (ionInput)="onSearch()" debounce="300"
+      placeholder="Buscar películas y series"></ion-searchbar>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
@@ -13,5 +17,25 @@
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Home page"></app-explore-container>
+  <ion-list>
+    <ion-list-header>Popular Movies</ion-list-header>
+    <ion-card *ngFor="let movie of movies">
+      <img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="movie poster" />
+      <ion-card-header>
+        <ion-card-title>{{ movie.title }}</ion-card-title>
+        <ion-card-subtitle>⭐ {{ movie.vote_average }}</ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
+  </ion-list>
+
+  <ion-list>
+    <ion-list-header>Popular TV Shows</ion-list-header>
+    <ion-card *ngFor="let show of tvShows">
+      <img [src]="'https://image.tmdb.org/t/p/w500' + show.poster_path" alt="tv show poster" />
+      <ion-card-header>
+        <ion-card-title>{{ show.name }}</ion-card-title>
+        <ion-card-subtitle>⭐ {{ show.vote_average }}</ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
+  </ion-list>
 </ion-content>
