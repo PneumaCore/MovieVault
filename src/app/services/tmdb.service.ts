@@ -11,11 +11,22 @@ export class TmdbService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getPopularMovies() {
-    return this.httpClient.get(`${this.baseUrl}/movie/popular?api_key=${this.apiKey}`);
+  searchTrendings(query: string, page: number = 1) {
+    return this.httpClient.get(`${this.baseUrl}/search/multi`, {
+      params: {
+        api_key: this.apiKey,
+        query: query,
+        page: page.toString()
+      }
+    });
   }
 
-  getPopularTvShows() {
-    return this.httpClient.get(`${this.baseUrl}/tv/popular?api_key=${this.apiKey}`);
+  getAllTrendings(page: number = 1) {
+    return this.httpClient.get(`${this.baseUrl}/trending/all/week`, {
+      params: {
+        api_key: this.apiKey,
+        page: page.toString()
+      }
+    });
   }
 }
